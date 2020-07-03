@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aircraft index{% endblock %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h1>Aircraft liste</h1>
+</div>
+
+<div class="container">
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <a class="navbar-brand" href="{{ path('aircraft_index') }}" style="color: white;">Accueil</a>
+  <a class="navbar-brand" href="{{ path('aircraft_new') }}" style="color: white;" >Créer un Aircraft</a>
+</nav>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Manufacturer</th>
+                <th>BasicType</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aircraft in aircraft %}
+            <tr>
+                <td>{{ aircraft.id }}</td>
+                <td>{{ aircraft.manufacturer }}</td>
+                <td>{{ aircraft.basicType }}</td>
+                <td>
+                <a class="btn btn-info" href="{{ path('aircraft_show', {'id': aircraft.id}) }}">Afficher</a>
+                <a class="btn btn-warning" href="{{ path('aircraft_edit', {'id': aircraft.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('aircraft_new') }}">Créer un aircraft</a>
+</div>
+{% endblock %}
